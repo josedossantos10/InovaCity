@@ -16,4 +16,10 @@ public class CriarPubliacao extends AppCompatActivity {
         this.finish();
 
     }
+
+
+    public void publicacar(View v){
+        this.finish();
+
+    }
 }

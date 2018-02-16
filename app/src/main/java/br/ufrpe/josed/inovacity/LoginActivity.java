@@ -86,8 +86,15 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
     }
 
+
     public void entrar(View v){
         Intent intent = new Intent(this, FeedActivity.class );
+        startActivity(intent);
+
+    }
+
+    public void abrirRealizarCadastro(View v){
+        Intent intent = new Intent(this, CadastrarUsuario.class );
         startActivity(intent);
 
     }

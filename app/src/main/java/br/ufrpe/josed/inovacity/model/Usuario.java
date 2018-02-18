@@ -25,7 +25,7 @@ public class Usuario {
     private String estado;
     private Date dataCadastro;
 
-
+    public Usuario(){}
 
     public Usuario(String nome, String cpf, String email, String senha, String celular, String rua, String numero, String cidade, String bairro, String cep) {
         this.nome = nome;
@@ -38,13 +38,16 @@ public class Usuario {
         this.cidade = cidade;
         this.bairro = bairro;
         this.cep = cep;
-       // this.estado = estado;
-        //this.dataCadastro =
+        this.estado = estado;
+        Date date= new Date();
+        this.dataCadastro = date;
 
     }
 
 
     public long getId() {return id;}
+
+    public void setId(long id) {this.id = id;}
 
     public String getNome() {
         return nome;
@@ -134,5 +137,8 @@ public class Usuario {
         return dataCadastro;
     }
 
+    public String getSenha() {
+        return senha;
+    }
 }
 

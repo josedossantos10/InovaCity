@@ -34,6 +34,7 @@ public class Mensagens {
 
     }
 
+
     public static void SnackCurto(View view, String msg){
 
         Snackbar.make(view, msg, Snackbar.LENGTH_SHORT).setAction("Action", null).show();
@@ -57,6 +58,9 @@ public class Mensagens {
         Toast.makeText(context, msg, Toast.LENGTH_LONG).show();
 
     }
+
+
+
 
 
 

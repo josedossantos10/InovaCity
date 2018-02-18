@@ -3,9 +3,11 @@ package br.ufrpe.josed.inovacity;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.app.LoaderManager.LoaderCallbacks;
 
@@ -35,8 +37,14 @@ import java.util.List;
 import static android.Manifest.permission.READ_CONTACTS;
 import android.content.Intent;
 
+import br.ufrpe.josed.inovacity.repositorio.Usuario;
+import br.ufrpe.josed.inovacity.util.Mensagens;
+import br.ufrpe.josed.inovacity.util.User;
+
 
 public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<Cursor> {
+
+    Usuario usuarioDAO;
 
     private static final int REQUEST_READ_CONTACTS = 0;
     private static final String[] DUMMY_CREDENTIALS = new String[]{
@@ -55,6 +63,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        usuarioDAO = new Usuario(this);
+
         setContentView(R.layout.activity_login);
         // Set up the login form.
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
@@ -87,13 +98,35 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     }
 
 
-    public void entrar(View v){
-        Intent intent = new Intent(this, FeedActivity.class );
+    public void abrirListarUsuarios(View v){
+        Intent intent = new Intent(this, ListarUsuarios.class );
         startActivity(intent);
+    }
 
+
+    public void entrar(final View v){
+            br.ufrpe.josed.inovacity.model.Usuario usuario = new br.ufrpe.josed.inovacity.model.Usuario();
+            usuario = usuarioDAO.buscarPorEmail(mEmailView.getText().toString());
+
+            if (usuario != null) {
+                if (mPasswordView.getText().toString().equals(usuario.getSenha())) {
+                    Mensagens.ToastLongo(this, "Bem-Vindo "+usuario.getNome());
+                    User.currentUser = usuario;
+                    FeedActivity.setLabel(usuario.getNome());
+                    finish();
+
+                } else {
+                    Mensagens.SnackLongo(v, "E-mail ou senha incorreta!", "Tentar Novamente");
+                }
+
+            } else {
+                Mensagens.SnackLongo(v, "Usuario não encontrado!", "Tentar Novamente");
+            }
+            //attemptLogin();
     }
 
     public void abrirRealizarCadastro(View v){
+        finish();
         Intent intent = new Intent(this, CadastrarUsuario.class );
         startActivity(intent);
 

@@ -4,23 +4,69 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="br.ufrpe.josed.inovacity.FeedActivity">
+    android:background="@color/colorPrimary_BackGroung">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
+        android:layout_height="80dp"
+        android:background="@color/colorPrimary"
+        android:clickable="true"
+        android:focusable="true"
+        android:theme="@style/AppTheme.AppBarOverlay"
+        app:expanded="true">
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_weight="1"
+                android:background="@color/colorPrimary" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="4"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageButton
+                    android:id="@+id/imageButton3"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="6"
+                    android:background="@android:color/transparent"
+                    android:contentDescription="Entrar"
+                    android:elevation="0dp"
+                    android:onClick="abrirLogin"
+                    android:tint="@color/common_google_signin_btn_text_dark_default"
+                    app:srcCompat="@drawable/ic_account_circle_white_36dp" />
+
+                <TextView
+                    android:id="@+id/txtLabelEntrar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Entrar"
+                    android:textAlignment="center"
+                    android:textAllCaps="true"
+                    android:textColor="@color/common_google_signin_btn_text_dark_default"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+        </LinearLayout>
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_feed" />
+    <include
+        layout="@layout/content_feed"
+        tools:layout_editor_absoluteY="58dp" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
@@ -28,12 +74,12 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
+        android:onClick="abrirCriarPublicacao"
         app:backgroundTint="@color/colorPrimary"
         app:fabSize="normal"
         app:rippleColor="@android:color/background_light"
         app:srcCompat="@drawable/ic_add_white_24dp"
         tools:layout_editor_absoluteX="313dp"
-        tools:layout_editor_absoluteY="497dp"
-        android:onClick="abrirCriarPublicacao"/>
+        tools:layout_editor_absoluteY="497dp" />
 
 </android.support.design.widget.CoordinatorLayout>

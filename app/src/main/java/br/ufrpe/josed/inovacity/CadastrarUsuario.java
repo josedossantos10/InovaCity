@@ -1,5 +1,6 @@
 package br.ufrpe.josed.inovacity;
 
+import android.database.SQLException;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -12,9 +13,10 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import java.util.regex.Pattern;
 
 import br.ufrpe.josed.inovacity.model.Usuario;
+import br.ufrpe.josed.inovacity.util.Mensagens;
+import br.ufrpe.josed.inovacity.util.User;
 
 public class CadastrarUsuario extends AppCompatActivity {
 
@@ -28,6 +30,8 @@ public class CadastrarUsuario extends AppCompatActivity {
     private EditText editCidade;
     private EditText editBairro;
     private EditText editCep;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,12 +63,26 @@ public void salvarUsuario(View view){
             editCelular.getText().toString(),editRua.getText().toString(), editNumero.getText().toString(), editCidade.getText().toString(),
             editBairro.getText().toString(),editCep.getText().toString());
 
-    Snackbar.make(view, "Validando e salvando", Snackbar.LENGTH_LONG).setAction("Action", null).show();
 
-validarCampos(usuario);
+if(validarCampos(usuario)){
+
+    br.ufrpe.josed.inovacity.repositorio.Usuario usuDAO = new br.ufrpe.josed.inovacity.repositorio.Usuario(this);
 
 
-   // Toast.makeText(this, "Salvo", Toast.LENGTH_LONG).show();
+    try {
+
+       usuDAO.inserir(usuario);
+       Toast.makeText(this, "Bem-vindo "+usuario.getNome(), Toast.LENGTH_LONG).show();
+        User.currentUser = usuario;
+        FeedActivity.setLabel(usuario.getNome());
+       finish();
+    }catch (SQLException e){
+        Mensagens.Alerta(this,"Erro","Ocorreu um erro ao conectar com o Banco de Dados: "+e.getMessage());
+    }
+
+}
+
+
     }
 
 
@@ -112,7 +130,7 @@ validarCampos(usuario);
     }
 
 
-        public boolean isEmailValido(String email){
+    public boolean isEmailValido(String email){
 
         if ((Patterns.EMAIL_ADDRESS.matcher(email).matches())&&(email.length()>8))
             return true;

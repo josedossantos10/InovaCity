@@ -14,11 +14,11 @@ import br.ufrpe.josed.inovacity.database.DBConnection;
  * Created by josed on 16/02/2018.
  */
 
-public class Usuario {
+public class UsuarioDAO {
 
     private SQLiteDatabase conexao;
 
-    public Usuario(Context context){
+    public UsuarioDAO(Context context){
         conexao = DBConnection.criarConexao(context);
 
     }

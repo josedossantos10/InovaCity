@@ -2,10 +2,11 @@
 <resources>
     <color name="colorPrimary">#0a2ada</color>
     <color name="colorPrimaryDark">#8d202c77</color>
-    <color name="colorAccent">#ff4081</color>
+    <color name="colorAccent">#0a127c</color>
     <color name="sky_blu">#004357ed</color>
     <color name="colorPrimary_2">#8aabfe</color>
     <color name="colorPrimary_BackGroung">#e4e7f3</color>
     <color name="colorPrimaryDarkGrey">#899ede</color>
     <color name="colorPrimary_BackGroung2">#dee2f3</color>
+    <color name="colorAccent2">#ff4081</color>
 </resources>

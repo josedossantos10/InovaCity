@@ -6,15 +6,13 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-import java.util.List;
-
 import br.ufrpe.josed.inovacity.Adapters.UsuarioAdapter;
-import br.ufrpe.josed.inovacity.repositorio.Usuario;
+import br.ufrpe.josed.inovacity.repositorio.UsuarioDAO;
 
 public class ListarUsuarios extends AppCompatActivity {
 
     UsuarioAdapter usuarioAdapter;
-    Usuario usuarioDAO;
+    UsuarioDAO usuarioDAO;
     RecyclerView listaUsuarios;
 
 
@@ -26,7 +24,7 @@ public class ListarUsuarios extends AppCompatActivity {
         listaUsuarios = (RecyclerView) findViewById(R.id.recycleUsuarios);
         listaUsuarios.setHasFixedSize(true);
         listaUsuarios.setLayoutManager(new LinearLayoutManager(this));
-        usuarioDAO = new Usuario(this);
+        usuarioDAO = new UsuarioDAO(this);
         usuarioAdapter = new UsuarioAdapter(usuarioDAO.listarTodos());
 
         listaUsuarios.setAdapter(usuarioAdapter);

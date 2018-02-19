@@ -3,11 +3,9 @@ package br.ufrpe.josed.inovacity;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
-import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.app.LoaderManager.LoaderCallbacks;
 
@@ -23,7 +21,6 @@ import android.provider.ContactsContract;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.inputmethod.EditorInfo;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -37,14 +34,14 @@ import java.util.List;
 import static android.Manifest.permission.READ_CONTACTS;
 import android.content.Intent;
 
-import br.ufrpe.josed.inovacity.repositorio.Usuario;
+import br.ufrpe.josed.inovacity.repositorio.UsuarioDAO;
 import br.ufrpe.josed.inovacity.util.Mensagens;
 import br.ufrpe.josed.inovacity.util.User;
 
 
 public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<Cursor> {
 
-    Usuario usuarioDAO;
+    UsuarioDAO usuarioDAO;
 
     private static final int REQUEST_READ_CONTACTS = 0;
     private static final String[] DUMMY_CREDENTIALS = new String[]{
@@ -64,7 +61,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        usuarioDAO = new Usuario(this);
+        usuarioDAO = new UsuarioDAO(this);
 
         setContentView(R.layout.activity_login);
         // Set up the login form.
@@ -105,12 +102,19 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
 
     public void entrar(final View v){
+        if(mEmailView.getText().toString().isEmpty()){
+            mEmailView.setError("Campo Vazio");
+
+        }else if(mPasswordView.getText().toString().isEmpty()){
+            mPasswordView.setError("Campo Vazio");
+
+        }else {
             br.ufrpe.josed.inovacity.model.Usuario usuario = new br.ufrpe.josed.inovacity.model.Usuario();
             usuario = usuarioDAO.buscarPorEmail(mEmailView.getText().toString());
 
             if (usuario != null) {
                 if (mPasswordView.getText().toString().equals(usuario.getSenha())) {
-                    Mensagens.ToastLongo(this, "Bem-Vindo "+usuario.getNome());
+                    Mensagens.ToastLongo(this, "Bem-Vindo "+usuario.getNome().substring(0, usuario.getNome().indexOf(" ")));
                     User.currentUser = usuario;
                     FeedActivity.setLabel(usuario.getNome());
                     finish();
@@ -123,6 +127,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 Mensagens.SnackLongo(v, "Usuario não encontrado!", "Tentar Novamente");
             }
             //attemptLogin();
+        }
     }
 
     public void abrirRealizarCadastro(View v){

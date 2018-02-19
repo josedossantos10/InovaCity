@@ -25,6 +25,21 @@ public class DBHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
 
+        db.execSQL("CREATE TABLE IF NOT EXISTS usuario_temp (" +
+                "    id            INTEGER      PRIMARY KEY AUTOINCREMENT," +
+                "    nome          VARCHAR (50) NOT NULL," +
+                "    cpf           STRING       UNIQUE," +
+                "    email         VARCHAR (50)," +
+                "    senha         VARCHAR (50)," +
+                "    celular       VARCHAR (20)," +
+                "    rua           VARCHAR (50)," +
+                "    numero        VARCHAR (10)," +
+                "    bairro        VARCHAR (50)," +
+                "    cidade        VARCHAR (50)," +
+                "    cep           VARCHAR (8)," +
+                "    estado        VARCHAR (30)," +
+                "    data_cadastro DATE);");
+
         db.execSQL("CREATE TABLE IF NOT EXISTS publicacao (" +
                 "    id            INTEGER      PRIMARY KEY AUTOINCREMENT," +
                 "    titulo          VARCHAR (20) NOT NULL," +
@@ -54,6 +69,8 @@ public class DBHelper extends SQLiteOpenHelper {
                 "    cep           VARCHAR (8)," +
                 "    estado        VARCHAR (30)," +
                 "    data_cadastro DATE);");
+
+
 
 
 

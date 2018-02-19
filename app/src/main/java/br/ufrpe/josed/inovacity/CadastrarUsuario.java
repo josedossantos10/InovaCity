@@ -3,7 +3,6 @@ package br.ufrpe.josed.inovacity;
 import android.database.SQLException;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -14,7 +13,12 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 
+import com.github.rtoshiro.util.format.SimpleMaskFormatter;
+import com.github.rtoshiro.util.format.text.MaskTextWatcher;
+
 import br.ufrpe.josed.inovacity.model.Usuario;
+import br.ufrpe.josed.inovacity.repositorio.UsuarioDAO;
+import br.ufrpe.josed.inovacity.util.Mascaras;
 import br.ufrpe.josed.inovacity.util.Mensagens;
 import br.ufrpe.josed.inovacity.util.User;
 
@@ -55,6 +59,11 @@ public class CadastrarUsuario extends AppCompatActivity {
           editCep = (EditText) findViewById(R.id.editTextCEP);
 
 
+        editCelular.addTextChangedListener(Mascaras.formatarCelular(editCelular));
+        editCpf.addTextChangedListener(Mascaras.formatarCPF(editCpf));
+        editCep.addTextChangedListener(Mascaras.formatarCEP(editCep));
+
+
     }
 
 public void salvarUsuario(View view){
@@ -66,13 +75,14 @@ public void salvarUsuario(View view){
 
 if(validarCampos(usuario)){
 
-    br.ufrpe.josed.inovacity.repositorio.Usuario usuDAO = new br.ufrpe.josed.inovacity.repositorio.Usuario(this);
+    UsuarioDAO usuDAO = new UsuarioDAO(this);
 
 
     try {
 
        usuDAO.inserir(usuario);
-       Toast.makeText(this, "Bem-vindo "+usuario.getNome(), Toast.LENGTH_LONG).show();
+        Mensagens.ToastLongo(this, "Bem-Vindo "+usuario.getNome().substring(0, usuario.getNome().indexOf(" ")));
+
         User.currentUser = usuario;
         FeedActivity.setLabel(usuario.getNome());
        finish();

@@ -1,13 +1,23 @@
 package br.ufrpe.josed.inovacity;
 
+import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.SQLException;
+import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.os.Bundle;
+import android.provider.MediaStore;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageSwitcher;
+import android.widget.ImageView;
 
 import br.ufrpe.josed.inovacity.model.Publicacao;
 import br.ufrpe.josed.inovacity.repositorio.PublicacaoDAO;
@@ -15,9 +25,14 @@ import br.ufrpe.josed.inovacity.util.Mensagens;
 import br.ufrpe.josed.inovacity.util.User;
 
 public class CriarPubliacao extends AppCompatActivity {
+    private static final int PERMISSAO_REQUEST = 2;
     private PublicacaoDAO publicacaoDAO;
     private EditText txtTitulo;
     private EditText txtDescricao;
+    public static final int IMAGEM_EXTERNAL = 12;
+    public static final int CAMERA = 12;
+    private ImageSwitcher imageSwitcher;
+    private ImageView imagemView;
 
 
     @Override
@@ -25,8 +40,16 @@ public class CriarPubliacao extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_criar_publiacao);
         txtTitulo = (EditText) findViewById(R.id.editTitulo);
+        imageSwitcher= (ImageSwitcher) findViewById(R.id.imageSwitcher);
         txtDescricao = (EditText) findViewById(R.id.editDescricaoDescricao);
+        imagemView = (ImageView) findViewById(R.id.imageView);
         publicacaoDAO = new PublicacaoDAO(this);
+
+        if(ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED) {
+            if(ActivityCompat.shouldShowRequestPermissionRationale(this,Manifest.permission.READ_EXTERNAL_STORAGE)) {}
+            else{ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},PERMISSAO_REQUEST);}}
+
+
     }
 
     public void cancelarCriarPublicacao(View v){
@@ -85,6 +108,55 @@ public class CriarPubliacao extends AppCompatActivity {
     public void adicionarFotos(View v){
         Mensagens.SnackLongo(v,"Não implementado!", "OK");
 
+/*        Intent intentImagens = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        intentImagens.setType("image/*");
+        startActivityForResult(intentImagens, IMAGEM_EXTERNAL);
+*/
+        Intent intentCaptura = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivityForResult(intentCaptura, CAMERA);
+
+
+
+
+    }
+
+   /* @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if((resultCode==RESULT_OK)&&(requestCode==IMAGEM_EXTERNAL)){
+
+            Uri imagemSelecionada = data.getData();
+            String[] filePath = {MediaStore.Images.Media.DATA};
+            Cursor c =  getContentResolver().query(imagemSelecionada,filePath,null,null,null);
+            c.moveToFirst();
+            int columIndex = c.getColumnIndex(filePath[0]);
+            String picturePath = c.getString(columIndex);
+            c.close();
+            Bitmap imagem = (BitmapFactory.decodeFile(picturePath));
+            imagemView.setImageBitmap(imagem);
+        }
+    }*/
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if((resultCode==RESULT_OK)&&(requestCode==CAMERA)){
+            Bundle bundle = data.getExtras();
+            Bitmap imagem = (Bitmap) bundle.get("data");
+            imagemView.setImageBitmap(imagem);
+        }
+    }
+
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,String permissions[], int[] grantResults) {
+        if(requestCode== PERMISSAO_REQUEST) {
+            if(grantResults.length> 0&& grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                // A permissão foi concedida. Pode continuar
+            }else{
+                // A permissão foi negada. Precisa ver o que deve ser desabilitado
+            }return;
+        }
     }
 
 }

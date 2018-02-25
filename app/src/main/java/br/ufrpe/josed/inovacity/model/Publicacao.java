@@ -1,6 +1,10 @@
 package br.ufrpe.josed.inovacity.model;
 
-import java.util.ArrayList;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.util.Date;
 
 /**
@@ -13,8 +17,11 @@ public class Publicacao {
     private String titulo;
     private String descricao;
 
+
     //RECURSOS
-    private ArrayList<String> imagens;
+    private byte[] imagem1;
+    private byte[] imagem2;
+    private byte[] imagem3;
     private long latitude;
     private long longitude;
 
@@ -42,10 +49,9 @@ public class Publicacao {
 
     }
 
-    public Publicacao(String titulo, String descricao, ArrayList<String> imagens, long latitude, long longitude) {
+    public Publicacao(String titulo, String descricao, long latitude, long longitude) {
         this.titulo = titulo;
         this.descricao = descricao;
-        this.imagens = imagens;
         this.latitude = latitude;
         this.longitude = longitude;
         Date date= new Date();
@@ -86,13 +92,6 @@ public class Publicacao {
         this.descricao = descricao;
     }
 
-    public ArrayList<String> getImagens() {
-        return imagens;
-    }
-
-    public void setImagens(ArrayList<String> imagens) {
-        this.imagens = imagens;
-    }
 
     public long getLatitude() {
         return latitude;
@@ -181,4 +180,84 @@ public class Publicacao {
     public void setId(long id) {
         this.id = id;
     }
+
+
+    public void setImagem1Byte(byte[] imagem1) {
+        this.imagem1 = imagem1;
+    }
+
+    public void setImagem2Byte(byte[] imagem2) {
+        this.imagem2 = imagem2;
+    }
+
+    public void setImagem3Byte(byte[] imagem3) {
+        this.imagem3 = imagem3;
+    }
+
+    public byte[] getImagem1Byte(){
+        return imagem1;
+    }
+    public byte[] getImagem2Byte(){
+        return imagem2;
+    }
+    public byte[] getImagem3Byte(){
+        return imagem3;
+    }
+
+
+    public Bitmap getImagem1() {
+        if (imagem1!=null){
+            ByteArrayInputStream imageStream= new ByteArrayInputStream(this.imagem1);
+            return BitmapFactory.decodeStream(imageStream);
+        }else {
+            return null;
+        }
+
+    }
+
+    public void setImagem1(Bitmap imagem) {
+        if (imagem!=null){
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            imagem.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+            this.imagem1 = stream.toByteArray();
+        }
+    }
+
+
+    public Bitmap getImagem2() {
+        if (imagem1!=null){
+            ByteArrayInputStream imageStream= new ByteArrayInputStream(this.imagem1);
+            return BitmapFactory.decodeStream(imageStream);
+        }else {
+            return null;
+        }
+
+    }
+
+    public void setImagem2(Bitmap imagem) {
+        if (imagem!=null){
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            imagem.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+            this.imagem1 = stream.toByteArray();
+        }
+    }
+
+    public Bitmap getImagem3() {
+        if (imagem1!=null){
+            ByteArrayInputStream imageStream= new ByteArrayInputStream(this.imagem1);
+            return BitmapFactory.decodeStream(imageStream);
+        }else {
+            return null;
+        }
+
+    }
+
+    public void setImagem3(Bitmap imagem) {
+        if (imagem!=null){
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            imagem.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+            this.imagem1 = stream.toByteArray();
+        }
+    }
+
 }

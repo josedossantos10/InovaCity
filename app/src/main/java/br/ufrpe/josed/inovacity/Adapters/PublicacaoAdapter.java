@@ -4,9 +4,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import br.ufrpe.josed.inovacity.R;
@@ -40,7 +40,17 @@ public class PublicacaoAdapter extends RecyclerView.Adapter<PublicacaoViewHolder
             Publicacao publicacao = publicacaos.get(position);
 
             holder.txtTitulo.setText(publicacao.getTitulo());
+            if (publicacao.getImagem1()!=null){
+                holder.imageView1.setImageBitmap(publicacao.getImagem1());
+            }else{
+                holder.imageView1.setImageResource(R.drawable.logo_inovacity2);
+            }
         }
+    }
+
+    public Publicacao getPublicacao(int position){
+        return publicacaos.get(position);
+
     }
 
     @Override
@@ -55,10 +65,13 @@ public class PublicacaoAdapter extends RecyclerView.Adapter<PublicacaoViewHolder
 class PublicacaoViewHolder extends RecyclerView.ViewHolder{
 
     public TextView txtTitulo;
+    public ImageView imageView1;
 
 
     public PublicacaoViewHolder(View itemView) {
         super(itemView);
         txtTitulo = (TextView) itemView.findViewById(R.id.textTitulo);
+        imageView1 = (ImageView) itemView.findViewById(R.id.imagePublicacao);
+
     }
 }

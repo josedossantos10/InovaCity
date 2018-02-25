@@ -114,7 +114,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
             if (usuario != null) {
                 if (mPasswordView.getText().toString().equals(usuario.getSenha())) {
-                    Mensagens.ToastLongo(this, "Bem-Vindo "+usuario.getNome().substring(0, usuario.getNome().indexOf(" ")));
+                    Mensagens.ToastLongo(this, "Bem-Vindo "+(usuario.getNome().indexOf(" ")>0?usuario.getNome().substring(0, usuario.getNome().indexOf(" ")):usuario.getNome()));
                     User.currentUser = usuario;
                     FeedActivity.setLabel(usuario.getNome());
                     finish();

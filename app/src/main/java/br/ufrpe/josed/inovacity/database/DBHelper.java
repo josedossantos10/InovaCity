@@ -3,7 +3,6 @@ package br.ufrpe.josed.inovacity.database;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.support.v4.content.ContextCompat;
 
 /**
  * Created by josed on 16/02/2018.
@@ -45,7 +44,11 @@ public class DBHelper extends SQLiteOpenHelper {
                 "    titulo          VARCHAR (20) NOT NULL," +
                 "    descricao       VARCHAR (100), " +
                 "    latitude         INTEGER," +
-                "    longitude       INTEGER," +
+                "   imagem1     blob,    " +
+                "   imagem2     blob,    " +
+                "   imagem3     blob,    " +
+                "   imagem4     blob,    " +
+                "longitude       INTEGER," +
                 "    apoios           INTEGER," +
                 "    nao_apoios           INTEGER," +
                 "    url             VARCHAR (200)," +

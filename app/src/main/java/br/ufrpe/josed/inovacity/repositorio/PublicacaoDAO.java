@@ -31,7 +31,9 @@ public class PublicacaoDAO {
         ContentValues values = new ContentValues();
         values.put("titulo",publicacao.getTitulo());
         values.put("descricao",publicacao.getDescricao());
-      //  values.put("imagens",publicacao.getImagens());
+        values.put("imagem1",publicacao.getImagem1Byte());
+        values.put("imagem2",publicacao.getImagem2Byte());
+        values.put("imagem3",publicacao.getImagem3Byte());
         values.put("latitude",publicacao.getLatitude());
         values.put("longitude",publicacao.getLongitude());
         values.put("apoios",publicacao.getApoios());
@@ -51,7 +53,9 @@ public class PublicacaoDAO {
         values.put("titulo",publicacao.getTitulo());
         values.put("descricao",publicacao.getDescricao());
 
-        //  values.put("imagens",publicacao.getImagens());
+        values.put("imagem1",publicacao.getImagem1Byte());
+        values.put("imagem2",publicacao.getImagem2Byte());
+        values.put("imagem3",publicacao.getImagem3Byte());
         values.put("latitude",publicacao.getLatitude());
         values.put("longitude",publicacao.getLongitude());
         values.put("apoios",publicacao.getApoios());
@@ -103,7 +107,9 @@ public class PublicacaoDAO {
 
             publicacao.setId(result.getLong(result.getColumnIndexOrThrow("id")));
             publicacao.setTitulo(result.getString(result.getColumnIndexOrThrow("titulo")));
-          //  publicacao.setImagens(result.getString(result.getColumnIndexOrThrow("imagens")));
+            publicacao.setImagem1Byte(result.getBlob(result.getColumnIndexOrThrow("imagem1")));
+            publicacao.setImagem2Byte(result.getBlob(result.getColumnIndexOrThrow("imagem2")));
+            publicacao.setImagem3Byte(result.getBlob(result.getColumnIndexOrThrow("imagem3")));
             publicacao.setDescricao(result.getString(result.getColumnIndexOrThrow("descricao")));
             publicacao.setLatitude(result.getLong(result.getColumnIndexOrThrow("latitude")));
             publicacao.setLongitude(result.getLong(result.getColumnIndexOrThrow("longitude")));
@@ -132,8 +138,9 @@ public class PublicacaoDAO {
 
                 publicacao.setId(result.getLong(result.getColumnIndexOrThrow("id")));
                 publicacao.setTitulo(result.getString(result.getColumnIndexOrThrow("titulo")));
-                //  publicacao.setImagens(result.getString(result.getColumnIndexOrThrow("imagens")));
-                publicacao.setDescricao(result.getString(result.getColumnIndexOrThrow("descricao")));
+                publicacao.setImagem1Byte(result.getBlob(result.getColumnIndexOrThrow("imagem1")));
+                publicacao.setImagem2Byte(result.getBlob(result.getColumnIndexOrThrow("imagem2")));
+                publicacao.setImagem3Byte(result.getBlob(result.getColumnIndexOrThrow("imagem3")));                publicacao.setDescricao(result.getString(result.getColumnIndexOrThrow("descricao")));
                 publicacao.setLatitude(result.getLong(result.getColumnIndexOrThrow("latitude")));
                 publicacao.setLongitude(result.getLong(result.getColumnIndexOrThrow("longitude")));
                 publicacao.setApoios(result.getInt(result.getColumnIndexOrThrow("apoios")));
@@ -166,8 +173,9 @@ public class PublicacaoDAO {
 
                 publicacao.setId(result.getLong(result.getColumnIndexOrThrow("id")));
                 publicacao.setTitulo(result.getString(result.getColumnIndexOrThrow("titulo")));
-                //  publicacao.setImagens(result.getString(result.getColumnIndexOrThrow("imagens")));
-                publicacao.setDescricao(result.getString(result.getColumnIndexOrThrow("descricao")));
+                publicacao.setImagem1Byte(result.getBlob(result.getColumnIndexOrThrow("imagem1")));
+                publicacao.setImagem2Byte(result.getBlob(result.getColumnIndexOrThrow("imagem2")));
+                publicacao.setImagem3Byte(result.getBlob(result.getColumnIndexOrThrow("imagem3")));                publicacao.setDescricao(result.getString(result.getColumnIndexOrThrow("descricao")));
                 publicacao.setLatitude(result.getLong(result.getColumnIndexOrThrow("latitude")));
                 publicacao.setLongitude(result.getLong(result.getColumnIndexOrThrow("longitude")));
                 publicacao.setApoios(result.getInt(result.getColumnIndexOrThrow("apoios")));

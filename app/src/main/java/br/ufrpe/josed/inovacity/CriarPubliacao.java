@@ -32,6 +32,7 @@ public class CriarPubliacao extends AppCompatActivity {
     public static final int IMAGEM_EXTERNAL = 12;
     public static final int CAMERA = 12;
     private ImageSwitcher imageSwitcher;
+    private Bitmap imagem1;
     private ImageView imagemView;
 
 
@@ -49,7 +50,6 @@ public class CriarPubliacao extends AppCompatActivity {
             if(ActivityCompat.shouldShowRequestPermissionRationale(this,Manifest.permission.READ_EXTERNAL_STORAGE)) {}
             else{ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},PERMISSAO_REQUEST);}}
 
-
     }
 
     public void cancelarCriarPublicacao(View v){
@@ -59,14 +59,13 @@ public class CriarPubliacao extends AppCompatActivity {
 
 
     public void publicar(View v){
-
-
         /* Aqui o codigo para salvar os dados no banco de dados sqlite
         * */
         if(User.currentUser!=null){
             Publicacao publicacao = new Publicacao();
             publicacao.setTitulo(txtTitulo.getText().toString());
             publicacao.setDescricao(txtDescricao.getText().toString());
+            publicacao.setImagem1(imagem1);
 
             if(publicacao.getTitulo().length()>5){
                 if(publicacaoDAO.inserir(publicacao)>0){
@@ -106,7 +105,6 @@ public class CriarPubliacao extends AppCompatActivity {
     }
 
     public void adicionarFotos(View v){
-        Mensagens.SnackLongo(v,"Não implementado!", "OK");
 
 /*        Intent intentImagens = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         intentImagens.setType("image/*");
@@ -142,8 +140,8 @@ public class CriarPubliacao extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if((resultCode==RESULT_OK)&&(requestCode==CAMERA)){
             Bundle bundle = data.getExtras();
-            Bitmap imagem = (Bitmap) bundle.get("data");
-            imagemView.setImageBitmap(imagem);
+            imagem1 = (Bitmap) bundle.get("data");
+            imagemView.setImageBitmap(imagem1);
         }
     }
 

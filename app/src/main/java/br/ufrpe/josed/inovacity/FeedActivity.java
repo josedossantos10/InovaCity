@@ -1,6 +1,5 @@
 package br.ufrpe.josed.inovacity;
 
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,13 +13,11 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
 
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-
 import br.ufrpe.josed.inovacity.Adapters.PublicacaoAdapter;
 import br.ufrpe.josed.inovacity.model.Usuario;
 import br.ufrpe.josed.inovacity.repositorio.PublicacaoDAO;
 import br.ufrpe.josed.inovacity.repositorio.UsuarioTempDAO;
+import br.ufrpe.josed.inovacity.util.Mensagens;
 import br.ufrpe.josed.inovacity.util.User;
 
 public class FeedActivity extends AppCompatActivity {
@@ -114,14 +111,23 @@ public class FeedActivity extends AppCompatActivity {
         }
     }
 
+    public void curtirPublicacao(View v) {
+
+        Mensagens.SnackLongo(v, "Não implementado!", "OK");
+    }
+
     public static void setLabel(String nome){
         txtLabelNome.setText(nome);
 
     }
 
+    public void abrirPublicacaoDetalhes(View view){
+        int i= listaPublicacoes.getChildViewHolder(view).getAdapterPosition();
+        Intent intent = new Intent(this, DetalhesPublicacao.class);
+        startActivity(intent);
 
 
-
+    }
 
 
 }

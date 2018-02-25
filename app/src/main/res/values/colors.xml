@@ -1,12 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <resources>
-    <color name="colorPrimary">#0a2ada</color>
-    <color name="colorPrimaryDark">#8d202c77</color>
-    <color name="colorAccent">#0a127c</color>
-    <color name="sky_blu">#004357ed</color>
-    <color name="colorPrimary_2">#8aabfe</color>
-    <color name="colorPrimary_BackGroung">#e4e7f3</color>
-    <color name="colorPrimaryDarkGrey">#899ede</color>
-    <color name="colorPrimary_BackGroung2">#dee2f3</color>
-    <color name="colorAccent2">#ff4081</color>
+
+    <color name="primaryColor">#1565c0</color>
+
+    <color name="primaryLightColor">#5e92f3</color>
+
+    <color name="primaryDarkColor">#003c8f</color>
+
+    <color name="secondaryColor">#607d8b</color>
+
+    <color name="secondaryLightColor">#8eacbb</color>
+
+    <color name="secondaryDarkColor">#34515e</color>
+
+    <color name="primaryTextColor">#ffffff</color>
+
+    <color name="secondaryTextColor">#000000</color>
+
 </resources>
+
+
+<!--
+<resources>
+
+    <color name="primaryColor">#ffd600</color>
+
+    <color name="primaryLightColor">#ffff52</color>
+
+    <color name="primaryDarkColor">#c7a500</color>
+
+    <color name="secondaryColor">#ef6c00</color>
+
+    <color name="secondaryLightColor">#ff9d3f</color>
+
+    <color name="secondaryDarkColor">#b53d00</color>
+
+    <color name="primaryTextColor">#3e2723</color>
+
+    <color name="secondaryTextColor">#fafafa</color>
+    <color name="colorPrimary_BackGroung2">#dee2f3</color>
+
+</resources>
+
+    <resources>
+        <color name="primaryColor">#1a237e</color>
+        <color name="primaryLightColor">#534bae</color>
+        <color name="primaryDarkColor">#000051</color>
+        <color name="secondaryColor">#1565c0</color>
+        <color name="secondaryLightColor">#5e92f3</color>
+        <color name="secondaryDarkColor">#003c8f</color>
+        <color name="primaryTextColor">#ffffff</color>
+        <color name="secondaryTextColor">#000000</color>
+
+        <color name="colorPrimary_BackGroung2">#dee2f3</color>
+    <color name="primaryColor2">#1221bc</color>
+
+</resources>
+
+-->
+
+
+    <!--
+
+    <resources>
+        <color name="colorPrimary">#0a2ada</color>
+        <color name="colorPrimaryDark">#8d202c77</color>
+        <color name="colorAccent">#0a127c</color>
+        <color name="sky_blu">#004357ed</color>
+        <color name="colorPrimary_2">#8aabfe</color>
+        <color name="colorPrimary_BackGroung">#e4e7f3</color>
+        <color name="colorPrimaryDarkGrey">#899ede</color>
+        <color name="colorPrimary_BackGroung2">#dee2f3</color>
+        <color name="colorAccent2">#ff4081</color>
+        <color name="colorPrimary_2_trans">#36042373</color>
+    </resources>
+    -->

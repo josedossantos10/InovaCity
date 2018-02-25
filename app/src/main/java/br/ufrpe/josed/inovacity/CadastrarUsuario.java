@@ -81,7 +81,7 @@ if(validarCampos(usuario)){
     try {
 
        usuDAO.inserir(usuario);
-        Mensagens.ToastLongo(this, "Bem-Vindo "+usuario.getNome().substring(0, usuario.getNome().indexOf(" ")));
+        Mensagens.ToastLongo(this, "Bem-Vindo "+(usuario.getNome().indexOf(" ")>0?usuario.getNome().substring(0, usuario.getNome().indexOf(" ")):usuario.getNome()));
 
         User.currentUser = usuario;
         FeedActivity.setLabel(usuario.getNome());

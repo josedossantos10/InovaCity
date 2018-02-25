@@ -1,6 +1,5 @@
 package br.ufrpe.josed.inovacity.Adapters;
 
-import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,7 +27,7 @@ public class UsuarioAdapter extends RecyclerView.Adapter<UsuarioAdapter.ViewHold
     public ViewHolderUsuario onCreateViewHolder(ViewGroup parent, int viewType) {
 
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View view = inflater.inflate(R.layout.unidade_usuario,parent,false);
+        View view = inflater.inflate(R.layout.caixa_usuario,parent,false);
 
         ViewHolderUsuario viewHolderUsuario = new ViewHolderUsuario(view);
 

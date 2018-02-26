@@ -43,12 +43,12 @@ public class DBHelper extends SQLiteOpenHelper {
                 "    id            INTEGER      PRIMARY KEY AUTOINCREMENT," +
                 "    titulo          VARCHAR (20) NOT NULL," +
                 "    descricao       VARCHAR (100), " +
-                "    latitude         INTEGER," +
+                "    latitude         DOUBLE," +
                 "   imagem1     blob,    " +
                 "   imagem2     blob,    " +
                 "   imagem3     blob,    " +
                 "   imagem4     blob,    " +
-                "longitude       INTEGER," +
+                "longitude       DOUBLE," +
                 "    apoios           INTEGER," +
                 "    nao_apoios           INTEGER," +
                 "    url             VARCHAR (200)," +

@@ -1,5 +1,6 @@
 package br.ufrpe.josed.inovacity.Adapters;
 
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,16 +10,19 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import br.ufrpe.josed.inovacity.DetalhesPublicacao;
 import br.ufrpe.josed.inovacity.R;
 import br.ufrpe.josed.inovacity.model.Publicacao;
+
+import static android.support.v4.content.ContextCompat.startActivity;
 
 /**
  * Created by josed on 17/02/2018.
  */
 
-public class PublicacaoAdapter extends RecyclerView.Adapter<PublicacaoViewHolder> {
+public class PublicacaoAdapter extends RecyclerView.Adapter<PublicacaoAdapter.PublicacaoViewHolder> {
 
-    List<Publicacao> publicacaos;
+    public List<Publicacao> publicacaos;
 
     public PublicacaoAdapter(List<Publicacao> publicacaos) {
         this.publicacaos = publicacaos;
@@ -48,6 +52,7 @@ public class PublicacaoAdapter extends RecyclerView.Adapter<PublicacaoViewHolder
         }
     }
 
+
     public Publicacao getPublicacao(int position){
         return publicacaos.get(position);
 
@@ -60,18 +65,35 @@ public class PublicacaoAdapter extends RecyclerView.Adapter<PublicacaoViewHolder
 
         }else
             return 0;    }
-}
-
-class PublicacaoViewHolder extends RecyclerView.ViewHolder{
-
-    public TextView txtTitulo;
-    public ImageView imageView1;
 
 
-    public PublicacaoViewHolder(View itemView) {
-        super(itemView);
-        txtTitulo = (TextView) itemView.findViewById(R.id.textTitulo);
-        imageView1 = (ImageView) itemView.findViewById(R.id.imagePublicacao);
+    class PublicacaoViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+
+        public TextView txtTitulo;
+        public ImageView imageView1;
+
+
+        public PublicacaoViewHolder(View itemView) {
+            super(itemView);
+            txtTitulo = (TextView) itemView.findViewById(R.id.textTituloDetalhes);
+            imageView1 = (ImageView) itemView.findViewById(R.id.imagePublicacao);
+
+            itemView.setOnClickListener(this);
+
+        }
+
+        @Override
+        public void onClick(View v) {
+            // Mensagens.ToastCurto(v.getContext(),"Posição "+getAdapterPosition());
+            Publicacao p = publicacaos.get(getAdapterPosition());
+            Intent intent = new Intent(v.getContext(), DetalhesPublicacao.class);
+            intent.putExtra("Publicacao", p);
+            startActivity(v.getContext(),intent,null);
+        }
+
+
 
     }
+
+
 }

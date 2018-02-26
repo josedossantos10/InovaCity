@@ -13,14 +13,17 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
 
+import java.io.Serializable;
+
 import br.ufrpe.josed.inovacity.Adapters.PublicacaoAdapter;
+import br.ufrpe.josed.inovacity.model.Publicacao;
 import br.ufrpe.josed.inovacity.model.Usuario;
 import br.ufrpe.josed.inovacity.repositorio.PublicacaoDAO;
 import br.ufrpe.josed.inovacity.repositorio.UsuarioTempDAO;
 import br.ufrpe.josed.inovacity.util.Mensagens;
 import br.ufrpe.josed.inovacity.util.User;
 
-public class FeedActivity extends AppCompatActivity {
+public class FeedActivity extends AppCompatActivity{
 
 
     private ConstraintLayout layout;
@@ -28,12 +31,14 @@ public class FeedActivity extends AppCompatActivity {
     RecyclerView listaPublicacoes;
     private static TextView txtLabelNome;
     private UsuarioTempDAO dao;
+    private PublicacaoAdapter publicacaoAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_feed);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setLogo(R.mipmap.ic_launcher_inovacity_round);
         setSupportActionBar(toolbar);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -47,7 +52,7 @@ public class FeedActivity extends AppCompatActivity {
         publicacaoDAO = new PublicacaoDAO(this);
         dao = new UsuarioTempDAO(this);
 
-        PublicacaoAdapter publicacaoAdapter = new PublicacaoAdapter(publicacaoDAO.listarTodos());
+        publicacaoAdapter = new PublicacaoAdapter(publicacaoDAO.listarTodos());
         listaPublicacoes.setAdapter(publicacaoAdapter);
 
     }
@@ -121,13 +126,13 @@ public class FeedActivity extends AppCompatActivity {
 
     }
 
-    public void abrirPublicacaoDetalhes(View view){
+    public void  abrirPublicacaoDetalhes(View view){
         int i= listaPublicacoes.getChildViewHolder(view).getAdapterPosition();
+        Publicacao p = publicacaoAdapter.getPublicacao(i);
         Intent intent = new Intent(this, DetalhesPublicacao.class);
+        intent.putExtra("Publicacao", p);
         startActivity(intent);
 
 
     }
-
-
 }

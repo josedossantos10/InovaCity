@@ -5,13 +5,14 @@ import android.graphics.BitmapFactory;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Created by josed on 14/02/2018.
  */
 
-public class Publicacao {
+public class Publicacao implements Serializable{
 
     private long id;
     private String titulo;
@@ -22,8 +23,8 @@ public class Publicacao {
     private byte[] imagem1;
     private byte[] imagem2;
     private byte[] imagem3;
-    private long latitude;
-    private long longitude;
+    private double latitude;
+    private double longitude;
 
     //CONTADORES
     private int apoios;
@@ -49,7 +50,7 @@ public class Publicacao {
 
     }
 
-    public Publicacao(String titulo, String descricao, long latitude, long longitude) {
+    public Publicacao(String titulo, String descricao, double latitude, double longitude) {
         this.titulo = titulo;
         this.descricao = descricao;
         this.latitude = latitude;
@@ -93,19 +94,19 @@ public class Publicacao {
     }
 
 
-    public long getLatitude() {
+    public double getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(long latitude) {
+    public void setLatitude(double latitude) {
         this.latitude = latitude;
     }
 
-    public long getLongitude() {
+    public double getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(long longitude) {
+    public void setLongitude(double longitude) {
         this.longitude = longitude;
     }
 

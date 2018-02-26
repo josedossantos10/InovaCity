@@ -111,13 +111,13 @@ public class PublicacaoDAO {
             publicacao.setImagem2Byte(result.getBlob(result.getColumnIndexOrThrow("imagem2")));
             publicacao.setImagem3Byte(result.getBlob(result.getColumnIndexOrThrow("imagem3")));
             publicacao.setDescricao(result.getString(result.getColumnIndexOrThrow("descricao")));
-            publicacao.setLatitude(result.getLong(result.getColumnIndexOrThrow("latitude")));
-            publicacao.setLongitude(result.getLong(result.getColumnIndexOrThrow("longitude")));
+            publicacao.setLatitude(result.getDouble(result.getColumnIndexOrThrow("latitude")));
+            publicacao.setLongitude(result.getDouble(result.getColumnIndexOrThrow("longitude")));
             publicacao.setApoios(result.getInt(result.getColumnIndexOrThrow("apoios")));
             publicacao.setNaoApoios(result.getInt(result.getColumnIndexOrThrow("nao_apoios")));
 
-           // publicacao.setDataAbertura(result.getLong(result.getColumnIndexOrThrow("data_abertura")));
-          //  publicacao.setDataFechamento(result.getLong(result.getColumnIndexOrThrow("data_fechamento")));
+           // publicacao.setDataAbertura(result.getDouble(result.getColumnIndexOrThrow("data_abertura")));
+          //  publicacao.setDataFechamento(result.getDouble(result.getColumnIndexOrThrow("data_fechamento")));
             publicacao.setResolvida(result.getInt(result.getColumnIndexOrThrow("resolvida"))>0);
             publicacao.setVisivel(result.getInt(result.getColumnIndexOrThrow("visivel"))>0);
             publicacao.setUrl(result.getString(result.getColumnIndexOrThrow("url")));
@@ -141,13 +141,13 @@ public class PublicacaoDAO {
                 publicacao.setImagem1Byte(result.getBlob(result.getColumnIndexOrThrow("imagem1")));
                 publicacao.setImagem2Byte(result.getBlob(result.getColumnIndexOrThrow("imagem2")));
                 publicacao.setImagem3Byte(result.getBlob(result.getColumnIndexOrThrow("imagem3")));                publicacao.setDescricao(result.getString(result.getColumnIndexOrThrow("descricao")));
-                publicacao.setLatitude(result.getLong(result.getColumnIndexOrThrow("latitude")));
-                publicacao.setLongitude(result.getLong(result.getColumnIndexOrThrow("longitude")));
+                publicacao.setLatitude(result.getDouble(result.getColumnIndexOrThrow("latitude")));
+                publicacao.setLongitude(result.getDouble(result.getColumnIndexOrThrow("longitude")));
                 publicacao.setApoios(result.getInt(result.getColumnIndexOrThrow("apoios")));
                 publicacao.setNaoApoios(result.getInt(result.getColumnIndexOrThrow("nao_apoios")));
 
-                // publicacao.setDataAbertura(result.getLong(result.getColumnIndexOrThrow("data_abertura")));
-                //  publicacao.setDataFechamento(result.getLong(result.getColumnIndexOrThrow("data_fechamento")));
+                // publicacao.setDataAbertura(result.getDouble(result.getColumnIndexOrThrow("data_abertura")));
+                //  publicacao.setDataFechamento(result.getDouble(result.getColumnIndexOrThrow("data_fechamento")));
                 publicacao.setResolvida(result.getInt(result.getColumnIndexOrThrow("resolvida"))>0);
                 publicacao.setVisivel(result.getInt(result.getColumnIndexOrThrow("visivel"))>0);
                 publicacao.setUrl(result.getString(result.getColumnIndexOrThrow("url")));
@@ -176,13 +176,13 @@ public class PublicacaoDAO {
                 publicacao.setImagem1Byte(result.getBlob(result.getColumnIndexOrThrow("imagem1")));
                 publicacao.setImagem2Byte(result.getBlob(result.getColumnIndexOrThrow("imagem2")));
                 publicacao.setImagem3Byte(result.getBlob(result.getColumnIndexOrThrow("imagem3")));                publicacao.setDescricao(result.getString(result.getColumnIndexOrThrow("descricao")));
-                publicacao.setLatitude(result.getLong(result.getColumnIndexOrThrow("latitude")));
-                publicacao.setLongitude(result.getLong(result.getColumnIndexOrThrow("longitude")));
+                publicacao.setLatitude(result.getDouble(result.getColumnIndexOrThrow("latitude")));
+                publicacao.setLongitude(result.getDouble(result.getColumnIndexOrThrow("longitude")));
                 publicacao.setApoios(result.getInt(result.getColumnIndexOrThrow("apoios")));
                 publicacao.setNaoApoios(result.getInt(result.getColumnIndexOrThrow("nao_apoios")));
 
-                // publicacao.setDataAbertura(result.getLong(result.getColumnIndexOrThrow("data_abertura")));
-                //  publicacao.setDataFechamento(result.getLong(result.getColumnIndexOrThrow("data_fechamento")));
+                // publicacao.setDataAbertura(result.getDouble(result.getColumnIndexOrThrow("data_abertura")));
+                //  publicacao.setDataFechamento(result.getDouble(result.getColumnIndexOrThrow("data_fechamento")));
                 publicacao.setResolvida(result.getInt(result.getColumnIndexOrThrow("resolvida"))>0);
                 publicacao.setVisivel(result.getInt(result.getColumnIndexOrThrow("visivel"))>0);
                 publicacao.setUrl(result.getString(result.getColumnIndexOrThrow("url")));

@@ -38,18 +38,6 @@ public class Publicacao implements Serializable{
     private boolean visivel;
     private  String url;
 
-    public Publicacao() {
-        Date date= new Date();
-        DataAbertura = date;
-        this.resolvida = false;
-        this.visivel = true;
-        this.apoios=0;
-        this.naoApoios=0;
-        this.denuncias=0;
-
-
-    }
-
     public Publicacao(String titulo, String descricao, double latitude, double longitude) {
         this.titulo = titulo;
         this.descricao = descricao;
@@ -62,6 +50,20 @@ public class Publicacao implements Serializable{
         this.apoios=0;
         this.naoApoios=0;
         this.denuncias=0;
+
+    }
+
+
+
+    public Publicacao() {
+        Date date= new Date();
+        DataAbertura = date;
+        this.resolvida = false;
+        this.visivel = true;
+        this.apoios=0;
+        this.naoApoios=0;
+        this.denuncias=0;
+
 
     }
 
@@ -260,5 +262,34 @@ public class Publicacao implements Serializable{
             this.imagem1 = stream.toByteArray();
         }
     }
+
+
+
+public PublicacaoFB getPublicacaoFb(){
+        return new PublicacaoFB(this.titulo, this.descricao, this.latitude, this.longitude);
+    }
+
+
+
+
+
+    public Publicacao(PublicacaoFB publicacao) {
+        //Date date= new Date();
+        //DataAbertura = date;
+        //  this.resolvida = false;
+        //  this.visivel = true;
+        //  this.apoios=0;
+        //  this.naoApoios=0;
+        // this.denuncias=0;
+        this.titulo = publicacao.getTitulo();
+        this.descricao = publicacao.getDescricao();
+        this.latitude = publicacao.getLatitude();
+        this.longitude = publicacao.getLongitude();
+
+    }
+
+
+
+
 
 }

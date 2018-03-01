@@ -5,12 +5,19 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.support.v7.widget.RecyclerView;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import br.ufrpe.josed.inovacity.Adapters.PublicacaoAdapter;
 import br.ufrpe.josed.inovacity.database.DBConnection;
 import br.ufrpe.josed.inovacity.model.*;
+import br.ufrpe.josed.inovacity.util.FireBaseDB;
 
 /**
  * Created by josed on 16/02/2018.
@@ -162,6 +169,8 @@ public class PublicacaoDAO {
         return null;
 
     }
+
+
     public List<br.ufrpe.josed.inovacity.model.Publicacao> listarRecentes(){
         List<Publicacao> publicacaoList = new ArrayList<Publicacao>();
 
@@ -195,4 +204,9 @@ public class PublicacaoDAO {
         }
 
         return null;}
+
+
+
+
+
 }

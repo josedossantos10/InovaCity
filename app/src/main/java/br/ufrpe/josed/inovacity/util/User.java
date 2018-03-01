@@ -15,14 +15,50 @@ import br.ufrpe.josed.inovacity.model.Usuario;
 
 public class User {
 
-    private long id;
+    private String id;
     private String nome;
     private String senha;
+    private String email;
 
 
-    public static Usuario currentUser=null;
+  //  public static Usuario currentUser=null;
 
 public void user(){}
 
+    public void salvar(){
 
+    FireBaseDB.UserRef.child(String.valueOf(id)).setValue(this);
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 }

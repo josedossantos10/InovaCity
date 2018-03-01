@@ -11,6 +11,7 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
@@ -28,9 +29,14 @@ import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseUser;
 
 import br.ufrpe.josed.inovacity.model.Publicacao;
 import br.ufrpe.josed.inovacity.repositorio.PublicacaoDAO;
+import br.ufrpe.josed.inovacity.util.FireBaseDB;
 import br.ufrpe.josed.inovacity.util.Mensagens;
 import br.ufrpe.josed.inovacity.util.User;
 
@@ -47,6 +53,7 @@ public class CriarPubliacao extends AppCompatActivity implements OnMapReadyCallb
     private MapView mapView;
     private MapFragment mMapFragment;
     private LocationManager lm;
+    private  View mProgressView;
     private double latitude=0;
     private double longitude=0;
 
@@ -59,7 +66,6 @@ public class CriarPubliacao extends AppCompatActivity implements OnMapReadyCallb
         imageSwitcher = (ImageSwitcher) findViewById(R.id.imageSwitcher);
         txtDescricao = (EditText) findViewById(R.id.editDescricaoDescricao);
         imagemView = (ImageView) findViewById(R.id.imageView);
-        publicacaoDAO = new PublicacaoDAO(this);
 
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
@@ -79,6 +85,7 @@ public class CriarPubliacao extends AppCompatActivity implements OnMapReadyCallb
         fragmentTransaction.commit();
         mMapFragment.getMapAsync(this);
 
+        mProgressView = findViewById(R.id.login_progress);
 
 
     }
@@ -92,10 +99,12 @@ public class CriarPubliacao extends AppCompatActivity implements OnMapReadyCallb
 
 
     public void publicar(View v) {
+
+
         /* Aqui o codigo para salvar os dados no banco de dados sqlite
         * */
-        if (User.currentUser != null) {
-
+        if (FireBaseDB.mAuth.getCurrentUser() != null) {
+            publicacaoDAO = new PublicacaoDAO(this);
             Publicacao publicacao = new Publicacao();
             publicacao.setTitulo(txtTitulo.getText().toString());
             publicacao.setDescricao(txtDescricao.getText().toString());
@@ -103,8 +112,15 @@ public class CriarPubliacao extends AppCompatActivity implements OnMapReadyCallb
             publicacao.setLongitude(longitude);
             publicacao.setLatitude(latitude);
 
-            if(publicacao.getTitulo().length()>5){
+            if(publicacao.getTitulo().length()>4){
                 if(publicacaoDAO.inserir(publicacao)>0){
+                    FireBaseDB.PublicacaoRef.child(publicacao.getDescricao()).setValue(publicacao.getPublicacaoFb());
+
+
+/*                  FireBaseDB.PublicacaoRef.child("Titulo").setValue(txtTitulo.getText().toString());
+                    FireBaseDB.PublicacaoRef.child("Descrição").setValue(txtDescricao.getText().toString());
+                    FireBaseDB.PublicacaoRef.child("latitude").setValue(latitude);
+                    FireBaseDB.PublicacaoRef.child("longitude").setValue(longitude);*/
                     Mensagens.ToastCurto(this,"Publicando!");
                     this.finish();}else{
                     Mensagens.SnackCurto(v,"Erro ao publicar!");
@@ -219,4 +235,5 @@ public class CriarPubliacao extends AppCompatActivity implements OnMapReadyCallb
     public void onPointerCaptureChanged(boolean hasCapture) {
 
     }
+
 }

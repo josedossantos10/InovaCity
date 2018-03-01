@@ -34,7 +34,13 @@ import java.util.List;
 import static android.Manifest.permission.READ_CONTACTS;
 import android.content.Intent;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseUser;
+
 import br.ufrpe.josed.inovacity.repositorio.UsuarioDAO;
+import br.ufrpe.josed.inovacity.util.FireBaseDB;
 import br.ufrpe.josed.inovacity.util.Mensagens;
 import br.ufrpe.josed.inovacity.util.User;
 
@@ -61,7 +67,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        usuarioDAO = new UsuarioDAO(this);
 
         setContentView(R.layout.activity_login);
         // Set up the login form.
@@ -102,6 +107,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
 
     public void entrar(final View v){
+        showProgress(true);
+
         if(mEmailView.getText().toString().isEmpty()){
             mEmailView.setError("Campo Vazio");
 
@@ -109,13 +116,15 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             mPasswordView.setError("Campo Vazio");
 
         }else {
+            usuarioDAO = new UsuarioDAO(this);
             br.ufrpe.josed.inovacity.model.Usuario usuario = new br.ufrpe.josed.inovacity.model.Usuario();
             usuario = usuarioDAO.buscarPorEmail(mEmailView.getText().toString());
 
             if (usuario != null) {
+
                 if (mPasswordView.getText().toString().equals(usuario.getSenha())) {
                     Mensagens.ToastLongo(this, "Bem-Vindo "+(usuario.getNome().indexOf(" ")>0?usuario.getNome().substring(0, usuario.getNome().indexOf(" ")):usuario.getNome()));
-                    User.currentUser = usuario;
+                  //  User.currentUser = usuario;
                     FeedActivity.setLabel(usuario.getNome());
                     finish();
 
@@ -126,8 +135,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             } else {
                 Mensagens.SnackLongo(v, "Usuario não encontrado!", "Tentar Novamente");
             }
-            //attemptLogin();
+            attemptLogin();
         }
+showProgress(false);
     }
 
     public void abrirRealizarCadastro(View v){
@@ -347,7 +357,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         }
 
 
-
         @Override
         protected Boolean doInBackground(Void... params) {
             // TODO: attempt authentication against a network service.
@@ -390,5 +399,32 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             showProgress(false);
         }
     }
+
+
+        public void entrarFb(View view){
+            FireBaseDB.mAuth.signInWithEmailAndPassword(mEmailView.toString(), mPasswordView.toString())
+                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                // Sign in success, update UI with the signed-in user's information
+                                FirebaseUser user = FireBaseDB.mAuth.getCurrentUser();
+                                Mensagens.ToastLongo(LoginActivity.this, "Bem-Vindo "+(user.getDisplayName()));
+                                FeedActivity.setLabel(user.getDisplayName());
+
+                                //updateUI(user);
+                            } else {
+                                // If sign in fails, display a message to the user.
+                                Mensagens.Alerta(LoginActivity.this,"Falha ao autenticar!", ""+task.getException().getMessage() );
+                            }
+
+                            // ...
+                        }
+                    });
+
+
+        }
+
+
 }
 

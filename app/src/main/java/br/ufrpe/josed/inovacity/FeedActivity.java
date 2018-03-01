@@ -13,25 +13,24 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
 
-import java.io.Serializable;
+import com.google.firebase.auth.FirebaseUser;
 
 import br.ufrpe.josed.inovacity.Adapters.PublicacaoAdapter;
 import br.ufrpe.josed.inovacity.model.Publicacao;
-import br.ufrpe.josed.inovacity.model.Usuario;
-import br.ufrpe.josed.inovacity.repositorio.PublicacaoDAO;
-import br.ufrpe.josed.inovacity.repositorio.UsuarioTempDAO;
+import br.ufrpe.josed.inovacity.util.FireBaseDB;
 import br.ufrpe.josed.inovacity.util.Mensagens;
-import br.ufrpe.josed.inovacity.util.User;
 
 public class FeedActivity extends AppCompatActivity{
 
+    //FireBaseDB fireBaseDB = new FireBaseDB();
 
     private ConstraintLayout layout;
-    PublicacaoDAO publicacaoDAO;
-    RecyclerView listaPublicacoes;
+    private RecyclerView listaPublicacoes;
     private static TextView txtLabelNome;
-    private UsuarioTempDAO dao;
     private PublicacaoAdapter publicacaoAdapter;
+
+    //private UsuarioTempDAO dao;
+    //PublicacaoDAO publicacaoDAO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,22 +48,30 @@ public class FeedActivity extends AppCompatActivity{
         listaPublicacoes.setHasFixedSize(true);
         listaPublicacoes.setLayoutManager(new LinearLayoutManager(this));
 
-        publicacaoDAO = new PublicacaoDAO(this);
-        dao = new UsuarioTempDAO(this);
+        //  publicacaoDAO = new PublicacaoDAO(this);
+        //  dao = new UsuarioTempDAO(this);
 
-        publicacaoAdapter = new PublicacaoAdapter(publicacaoDAO.listarTodos());
-        listaPublicacoes.setAdapter(publicacaoAdapter);
+        FireBaseDB.listarTodasPublicacoes(listaPublicacoes);
+
 
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        Usuario u = dao.recuperar();
+        FirebaseUser currentUser = FireBaseDB.mAuth.getCurrentUser();
+        if (currentUser!=null){
+            setLabel(currentUser.getEmail()==null?"Entrar":currentUser.getEmail());
+
+        }
+
+        //updateUI(currentUser);
+
+     /*   Usuario u = dao.recuperar();
         if(u!=null){
             User.currentUser = u;
             setLabel(u.getNome());
-        }
+        }*/
     }
 
     @Override
@@ -76,15 +83,22 @@ public class FeedActivity extends AppCompatActivity{
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        dao.removerTodos();
-        if(User.currentUser!=null){
+
+      /*  dao.removerTodos();
+        if (FireBaseDB.mAuth.getCurrentUser() != null) {
             dao.inserir(User.currentUser);
-        }
+        }*/
     }
 
 
     public void atualizar() {
-        listaPublicacoes.setAdapter(new PublicacaoAdapter(publicacaoDAO.listarTodos()));
+        //listaPublicacoes.setAdapter(new PublicacaoAdapter(publicacaoDAO.listarTodos()));
+        FireBaseDB.listarTodasPublicacoes(listaPublicacoes);
+        if (FireBaseDB.mAuth.getCurrentUser()!=null) {
+
+            setLabel(FireBaseDB.mAuth.getCurrentUser().getEmail() == null ? "Entrar" : FireBaseDB.mAuth.getCurrentUser().getEmail());
+
+        }
     }
 
     public void abrirCriarPublicacao(View v){
@@ -94,16 +108,16 @@ public class FeedActivity extends AppCompatActivity{
 
     public void abrirLogin(View v){
 
-        if(User.currentUser!=null) {
+        if (FireBaseDB.mAuth.getCurrentUser() != null) {
             AlertDialog.Builder dialog = new AlertDialog.Builder(this);
             dialog.setTitle("Sair");
-            dialog.setMessage("Você já está conectado como "+User.currentUser.getNome()+". Deseja realmente sair?");
+            dialog.setMessage("Você já está conectado como "+FireBaseDB.mAuth.getCurrentUser().getEmail()+". Deseja realmente sair?");
             dialog.setNegativeButton("Cancelar",null);
             dialog.setPositiveButton("SAIR",new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    User.currentUser=null;
-                    dao.removerTodos();
+                    FireBaseDB.mAuth.signOut();
+                    //  dao.removerTodos();
                     FeedActivity.setLabel("ENTRAR");
                 }
 

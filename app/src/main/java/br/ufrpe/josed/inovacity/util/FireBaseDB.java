@@ -59,6 +59,7 @@ public class FireBaseDB {
                     publicacaoList.add(new Publicacao(publicacao));
                 }
 
+
                 // listaPublicacoes.setAdapter(null);
                 PublicacaoAdapter publicacaoAdapter = new PublicacaoAdapter(publicacaoList);
                 //  publicacaoAdapter = new PublicacaoAdapter(publicacaoDAO.listarTodos());

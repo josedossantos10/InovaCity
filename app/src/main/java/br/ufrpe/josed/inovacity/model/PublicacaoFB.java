@@ -6,10 +6,10 @@ package br.ufrpe.josed.inovacity.model;
 
 public class PublicacaoFB{
 
-    private String titulo;
-    private String descricao;
-    private double latitude;
-    private double longitude;
+     String titulo;
+     String descricao;
+     double latitude;
+     double longitude;
 
     public PublicacaoFB(String titulo, String descricao, double latitude, double longitude) {
         this.titulo = titulo;

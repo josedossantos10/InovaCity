@@ -1,8 +1,13 @@
 package br.ufrpe.josed.inovacity.util;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -22,6 +27,7 @@ import java.util.List;
 
 import br.ufrpe.josed.inovacity.Adapters.PublicacaoAdapter;
 import br.ufrpe.josed.inovacity.CadastrarUsuario;
+import br.ufrpe.josed.inovacity.MapaActivityTeste;
 import br.ufrpe.josed.inovacity.model.Publicacao;
 import br.ufrpe.josed.inovacity.model.PublicacaoFB;
 
@@ -78,5 +84,38 @@ public class FireBaseDB {
 
     }
 
+
+    public static void gerarMarcadores(GoogleMap googleMap){
+        final  List<PublicacaoFB> publicacaoLista = new ArrayList<PublicacaoFB>();
+        final GoogleMap mMap = googleMap;
+
+
+        FireBaseDB.PublicacaoRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                mMap.clear();
+                for (DataSnapshot dados: dataSnapshot.getChildren()){ //recupera os filhos do nó principal
+                    PublicacaoFB publicacao = dados.getValue(PublicacaoFB.class);
+                   // publicacaoLista.add(publicacao);
+
+                    MarkerOptions markerOptions = new MarkerOptions();
+                    markerOptions.position(new LatLng(publicacao.getLatitude(), publicacao.getLongitude()));
+                    markerOptions.title(publicacao.getTitulo());
+
+                    markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
+                    mMap.addMarker(markerOptions);
+
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+
+        });
+
+    }
 
     }

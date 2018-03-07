@@ -85,7 +85,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textLocal">
 
             <fragment xmlns:android="http://schemas.android.com/apk/res/android"
-                android:id="@+id/map"
+                android:id="@+id/feedMap"
                 class="com.google.android.gms.maps.SupportMapFragment"
                 android:layout_width="match_parent"
                 android:layout_height="180dp" />

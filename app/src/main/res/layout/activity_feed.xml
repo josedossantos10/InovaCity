@@ -73,7 +73,7 @@
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
         android:background="@color/primaryColor"
-        android:onClick="abrirCriarPublicacao"
+        android:onClick="abrirMapa"
         app:backgroundTint="@color/secondaryColor"
         app:fabSize="normal"
         app:rippleColor="@android:color/background_light"

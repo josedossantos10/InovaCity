@@ -34,6 +34,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.util.Date;
+
 import br.ufrpe.josed.inovacity.model.Publicacao;
 import br.ufrpe.josed.inovacity.repositorio.PublicacaoDAO;
 import br.ufrpe.josed.inovacity.util.FireBaseDB;
@@ -114,7 +116,7 @@ public class CriarPubliacao extends AppCompatActivity implements OnMapReadyCallb
 
             if(publicacao.getTitulo().length()>4){
                 if(publicacaoDAO.inserir(publicacao)>0){
-                    FireBaseDB.PublicacaoRef.child(publicacao.getDescricao()).setValue(publicacao.getPublicacaoFb());
+                    FireBaseDB.PublicacaoRef.child(String.valueOf(new Date().getTime())).setValue(publicacao.getPublicacaoFb());
 
 
 /*                  FireBaseDB.PublicacaoRef.child("Titulo").setValue(txtTitulo.getText().toString());

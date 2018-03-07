@@ -105,6 +105,10 @@ public class FeedActivity extends AppCompatActivity{
         Intent intent = new Intent(this, CriarPubliacao.class );
         startActivity(intent);
     }
+    public void abrirMapa(View v){
+        Intent intent = new Intent(this, MapaActivityTeste.class );
+        startActivity(intent);
+    }
 
     public void abrirLogin(View v){
 

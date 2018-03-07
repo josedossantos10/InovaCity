@@ -59,7 +59,6 @@ public class CriarPubliacao extends AppCompatActivity implements OnMapReadyCallb
     private double latitude=0;
     private double longitude=0;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -224,7 +223,6 @@ public class CriarPubliacao extends AppCompatActivity implements OnMapReadyCallb
 
         longitude = location.getLongitude();
         latitude = location.getLatitude();
-
         googleMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
 
         googleMap.addMarker(new MarkerOptions().position(new LatLng(latitude,longitude))

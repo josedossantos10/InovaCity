@@ -6,7 +6,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-import br.ufrpe.josed.inovacity.Adapters.UsuarioAdapter;
+import br.ufrpe.josed.inovacity.adapters.*;
 import br.ufrpe.josed.inovacity.repositorio.UsuarioDAO;
 
 public class ListarUsuarios extends AppCompatActivity {

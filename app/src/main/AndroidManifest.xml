@@ -25,9 +25,9 @@
         android:supportsRtl="true"
         android:theme="@style/Inovacity">
         <activity
-            android:name=".FeedActivity"
+            android:name=".MainActivity"
             android:label="@string/title_activity_feed"
-            android:theme="@style/Inovacity.NoActionBar">
+            android:theme="@style/Inovacity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -35,7 +35,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".LoginActivity"
+            android:name=".FeedActivity"
             android:theme="@style/Inovacity.NoActionBar" />
         <activity android:name=".CriarPubliacao" />
         <activity
@@ -56,7 +56,30 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyCIEH4ngCC6fPqNzBZPeFkfm8AZfievp0M" />
 
-        <activity android:name=".MapaActivityTeste" />
+        <!--
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/title_activity_main"
+            android:theme="@style/Inovacity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/title_activity_main"
+            android:theme="@style/Inovacity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+      -->
+
     </application>
 
 </manifest>

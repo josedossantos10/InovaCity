@@ -15,7 +15,7 @@ import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseUser;
 
-import br.ufrpe.josed.inovacity.Adapters.PublicacaoAdapter;
+import br.ufrpe.josed.inovacity.adapters.PublicacaoAdapter;
 import br.ufrpe.josed.inovacity.model.Publicacao;
 import br.ufrpe.josed.inovacity.util.FireBaseDB;
 import br.ufrpe.josed.inovacity.util.Mensagens;
@@ -106,7 +106,7 @@ public class FeedActivity extends AppCompatActivity{
         startActivity(intent);
     }
     public void abrirMapa(View v){
-        Intent intent = new Intent(this, MapaActivityTeste.class );
+        Intent intent = new Intent(this, MapaFeedActivity.class );
         startActivity(intent);
     }
 

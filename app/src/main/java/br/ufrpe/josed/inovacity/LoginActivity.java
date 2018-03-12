@@ -125,7 +125,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 if (mPasswordView.getText().toString().equals(usuario.getSenha())) {
                     Mensagens.ToastLongo(this, "Bem-Vindo "+(usuario.getNome().indexOf(" ")>0?usuario.getNome().substring(0, usuario.getNome().indexOf(" ")):usuario.getNome()));
                   //  User.currentUser = usuario;
-                    FeedActivity.setLabel(usuario.getNome());
+                    MainActivity.setLabel(usuario.getNome());
                     finish();
 
                 } else {
@@ -410,7 +410,7 @@ showProgress(false);
                                 // Sign in success, update UI with the signed-in user's information
                                 FirebaseUser user = FireBaseDB.mAuth.getCurrentUser();
                                 Mensagens.ToastLongo(LoginActivity.this, "Bem-Vindo "+(user.getDisplayName()));
-                                FeedActivity.setLabel(user.getDisplayName());
+                                MainActivity.setLabel(user.getDisplayName());
 
                                 //updateUI(user);
                             } else {

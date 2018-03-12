@@ -200,7 +200,7 @@ public class CadastrarUsuario extends AppCompatActivity {
                                 u.salvar();
 
                                 Mensagens.ToastLongo(CadastrarUsuario.this, "Bem-Vindo " + (u.getNome()));
-                                FeedActivity.setLabel(u.getNome());
+                                MainActivity.setLabel(u.getNome());
 
                                 //updateUI(user);
                             } else {

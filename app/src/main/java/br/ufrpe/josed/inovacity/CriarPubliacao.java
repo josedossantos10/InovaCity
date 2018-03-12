@@ -69,6 +69,7 @@ public class CriarPubliacao extends AppCompatActivity implements OnMapReadyCallb
         imagemView = (ImageView) findViewById(R.id.imageView);
 
 
+
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.READ_EXTERNAL_STORAGE)) {
             } else {

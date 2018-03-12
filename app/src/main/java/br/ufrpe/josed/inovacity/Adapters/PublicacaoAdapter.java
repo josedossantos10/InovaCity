@@ -1,4 +1,4 @@
-package br.ufrpe.josed.inovacity.Adapters;
+package br.ufrpe.josed.inovacity.adapters;
 
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
@@ -13,8 +13,6 @@ import java.util.List;
 import br.ufrpe.josed.inovacity.DetalhesPublicacao;
 import br.ufrpe.josed.inovacity.R;
 import br.ufrpe.josed.inovacity.model.Publicacao;
-
-import static android.support.v4.content.ContextCompat.startActivity;
 
 /**
  * Created by josed on 17/02/2018.
@@ -88,7 +86,7 @@ public class PublicacaoAdapter extends RecyclerView.Adapter<PublicacaoAdapter.Pu
             Publicacao p = publicacaos.get(getAdapterPosition());
             Intent intent = new Intent(v.getContext(), DetalhesPublicacao.class);
             intent.putExtra("Publicacao", p);
-            startActivity(v.getContext(),intent,null);
+            v.getContext().startActivity(intent);
         }
 
 

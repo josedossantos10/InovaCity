@@ -63,6 +63,7 @@
     </android.support.design.widget.AppBarLayout>
 
     <include
+        android:id="@+id/conteudoDoFeed"
         layout="@layout/content_feed"
         tools:layout_editor_absoluteY="58dp" />
 
